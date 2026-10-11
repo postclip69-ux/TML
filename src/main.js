@@ -184,6 +184,13 @@ function stopAudio() {
 async function refreshDevices() {
   if (!navigator.mediaDevices?.enumerateDevices) return;
   const devices = await navigator.mediaDevices.enumerateDevices();
+  console.table(
+  devices.map(d => ({
+    label: d.label,
+    kind: d.kind,
+    deviceId: d.deviceId
+  }))
+);
 
   const currentInput = inputDevice.value;
   const currentOutput = outputDevice.value;
