@@ -142,7 +142,7 @@ async function buildAudio(deviceId = "") {
 
   const constraints = {
     audio: {
-      ...(deviceId ? { deviceId: { exact: deviceId } } : {}),
+      ...(deviceId ? { deviceId: { ideal: deviceId } } : {}),
       channelCount: { ideal: 1 },
       echoCancellation: false,
       noiseSuppression: false,
