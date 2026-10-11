@@ -184,6 +184,11 @@ function stopAudio() {
 async function refreshDevices() {
   if (!navigator.mediaDevices?.enumerateDevices) return;
   const devices = await navigator.mediaDevices.enumerateDevices();
+  const devices = await navigator.mediaDevices.enumerateDevices();
+
+message.textContent = devices
+  .map(d => `${d.kind}: ${d.label || "(tanpa nama)"}`)
+  .join(" | ");
   console.table(
   devices.map(d => ({
     label: d.label,
