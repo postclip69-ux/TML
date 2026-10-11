@@ -213,8 +213,17 @@ async function refreshDevices() {
     outputDevice.value = currentOutput;
 
   inputDevice.disabled = ins.length === 0;
-  outputDevice.disabled = outs.length === 0 || typeof HTMLMediaElement.prototype.setSinkId !== "function";
-}
+
+const outputSupported =
+  typeof AudioContext !== "undefined" &&
+  typeof AudioContext.prototype.setSinkId === "function";
+
+outputDevice.disabled = !outputSupported || outs.length === 0;
+
+if (!outputSupported) {
+  message.textContent =
+    "Browser ini tidak mendukung pemilihan output audio manual.";
+       }
 
 async function setOutputDevice(deviceId) {
   if (!ctx || typeof ctx.setSinkId !== "function") return;
