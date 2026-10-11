@@ -224,6 +224,8 @@ if (!outputSupported) {
   message.textContent =
     "Browser ini tidak mendukung pemilihan output audio manual.";
        }
+}
+  
 
 async function setOutputDevice(deviceId) {
   if (!ctx || typeof ctx.setSinkId !== "function") return;
