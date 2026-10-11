@@ -47,16 +47,15 @@ async function buildAudio(deviceId = "") {
   if (stream) stopAudio();
 
   stream = await navigator.mediaDevices.getUserMedia({
-    audio: {
-      deviceId: deviceId ? { exact: deviceId } : undefined,
-      channelCount: 1,
-      echoCancellation: false,
-      noiseSuppression: false,
-      autoGainControl: false,
-      latency: 0
-    },
-    video: false
-  });
+  audio: {
+    ...(deviceId ? { deviceId: { ideal: deviceId } } : {}),
+    channelCount: { ideal: 1 },
+    echoCancellation: false,
+    noiseSuppression: false,
+    autoGainControl: false
+  },
+  video: false
+});
 
   if (!ctx) {
     ctx = new AudioContext({ latencyHint: "interactive" });
