@@ -158,12 +158,12 @@ async function buildAudio(deviceId = "") {
   }
 
   if (!ctx) {
-    ctx = new AudioContext({ latencyHint: "interactive" });
-  }
+  ctx = new AudioContext({ latencyHint: "interactive" });
+}
 
-  if (ctx.state === "suspended") {
-    await ctx.resume();
-  }
+if (ctx.state === "suspended") {
+  await ctx.resume();
+}
 
   source = ctx.createMediaStreamSource(stream);
   inputGain = ctx.createGain();
@@ -308,22 +308,35 @@ function stopAudio() {
 }
 
 async function setOutputDevice(deviceId) {
-  if (!ctx || typeof ctx.setSinkId !== "function") {
-    diagnosticText += "\nBrowser tidak mendukung pengaturan output manual.";
+  if (!ctx) {
+    diagnosticText =
+      "Nyalakan mikrofon terlebih dahulu sebelum memilih output.";
+    showDiagnostics();
+    return;
+  }
+
+  if (typeof ctx.setSinkId !== "function") {
+    diagnosticText =
+      "Chrome Android tidak menyediakan pemilihan output manual untuk konteks audio ini. Coba atur perangkat output melalui pengaturan audio Android.";
     showDiagnostics();
     return;
   }
 
   try {
     await ctx.setSinkId(deviceId);
-    diagnosticText += "\nPermintaan output berhasil diterapkan.";
+
+    diagnosticText =
+      `Output berhasil dipilih: ${
+        outputDevice.selectedOptions[0]?.textContent || "Default"
+      }`;
+
   } catch (error) {
-    diagnosticText += `\nGagal mengganti output: ${error.message}`;
+    diagnosticText =
+      `Output gagal dipilih: ${error.name}: ${error.message}`;
   }
 
   showDiagnostics();
-}
-
+      }
 async function turnOn() {
   try {
     await buildAudio(inputDevice.value);
