@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="theme-color" content="#0b0d12" />
+    <title>MIC LIVE</title>
+  </head>
+  <body>
+    <main class="app">
+      <section class="card">
+        <div class="brand">MIC LIVE</div>
+        <div id="status" class="status off">OFF</div>
+
+        <button id="power" class="power" type="button" aria-pressed="false">
+          <span class="power-icon">●</span>
+          <span id="powerText">TURN ON</span>
+        </button>
+
+        <div class="meter-wrap">
+          <div class="meter-label"><span>INPUT</span><span id="meterValue">-∞ dB</span></div>
+          <div class="meter"><div id="meterBar"></div></div>
+        </div>
+
+        <div class="control">
+          <div><span>GAIN</span><b id="gainValue">0 dB</b></div>
+          <input id="gain" type="range" min="-12" max="24" step="0.5" value="0" />
+        </div>
+
+        <div class="control">
+          <div><span>DELAY</span><b id="delayValue">0 ms</b></div>
+          <input id="delay" type="range" min="0" max="500" step="1" value="0" />
+        </div>
+
+        <div class="control">
+          <div><span>ECHO</span><b id="echoValue">0%</b></div>
+          <input id="echo" type="range" min="0" max="85" step="1" value="0" />
+        </div>
+
+        <div class="control">
+          <div><span>REVERB</span><b id="reverbValue">0%</b></div>
+          <input id="reverb" type="range" min="0" max="100" step="1" value="0" />
+        </div>
+
+        <div class="select-row">
+          <label for="inputDevice">MIC INPUT</label>
+          <select id="inputDevice" disabled><option>Default</option></select>
+        </div>
+
+        <div class="select-row">
+          <label for="outputDevice">AUDIO OUTPUT</label>
+          <select id="outputDevice" disabled><option>Default</option></select>
+        </div>
+
+        <p id="message" class="message">Tekan TURN ON untuk mulai.</p>
+      </section>
+    </main>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
