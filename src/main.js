@@ -24,7 +24,7 @@ let dryGain = null;
 let delayNode = null;
 let echoFeedback = null;
 let echoWet = null;
-let reverb = null;
+let reverbNode = null;
 let reverbWet = null;
 let compressor = null;
 let master = null;
@@ -69,7 +69,7 @@ async function buildAudio(deviceId = "") {
   delayNode = ctx.createDelay(0.5);
   echoFeedback = ctx.createGain();
   echoWet = ctx.createGain();
-  reverb = ctx.createConvolver();
+  reverbNode = ctx.createConvolver();
   reverbWet = ctx.createGain();
   compressor = ctx.createDynamicsCompressor();
   master = ctx.createGain();
@@ -78,7 +78,7 @@ async function buildAudio(deviceId = "") {
   analyser.fftSize = 1024;
   analyser.smoothingTimeConstant = 0.55;
 
-  reverb.buffer = makeImpulseResponse(ctx);
+  reverbNode.buffer = makeImpulseResponse(ctx);
 
   // Low-latency parallel path:
   // source -> gain -> dry output
@@ -92,9 +92,9 @@ async function buildAudio(deviceId = "") {
   delayNode.connect(echoFeedback);
   echoFeedback.connect(delayNode);
   delayNode.connect(echoWet);
-  echoWet.connect(reverb);
+  echoWet.connect(reverbNode);
 
-  reverb.connect(reverbWet);
+  reverbNode.connect(reverbWet);
   reverbWet.connect(master);
 
   // Meter after input gain, before effects.
@@ -172,12 +172,12 @@ function stopAudio() {
   delayNode?.disconnect();
   echoFeedback?.disconnect();
   echoWet?.disconnect();
-  reverb?.disconnect();
+  reverbNode?.disconnect();
   reverbWet?.disconnect();
   compressor?.disconnect();
   master?.disconnect();
   source = analyser = inputGain = dryGain = delayNode = echoFeedback =
-    echoWet = reverb = reverbWet = compressor = master = null;
+    echoWet = reverbNode = reverbWet = compressor = master = null;
   meterBar.style.width = "0%";
   meterValue.textContent = "-∞ dB";
 }
