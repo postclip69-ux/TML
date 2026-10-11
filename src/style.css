@@ -1,0 +1,25 @@
+*{box-sizing:border-box}
+:root{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#f4f6fa;background:#0b0d12}
+body{margin:0;min-height:100vh;background:radial-gradient(circle at top,#171b25 0,#0b0d12 52%);display:grid;place-items:center}
+.app{width:100%;max-width:430px;padding:16px}
+.card{background:#11151d;border:1px solid #272d38;border-radius:24px;padding:22px;box-shadow:0 18px 60px #0008}
+.brand{text-align:center;font-size:20px;font-weight:800;letter-spacing:.18em;margin:4px 0 8px}
+.status{text-align:center;font-size:11px;font-weight:800;letter-spacing:.16em;margin-bottom:18px}
+.status.off{color:#737b88}.status.on{color:#62e6a4}
+.power{width:100%;height:64px;border:1px solid #303744;border-radius:16px;background:#191e27;color:#fff;font-weight:800;letter-spacing:.08em;font-size:14px;display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;touch-action:manipulation}
+.power.on{background:#173426;border-color:#2d9c68}
+.power-icon{font-size:13px;color:#737b88}.power.on .power-icon{color:#62e6a4}
+.meter-wrap{margin:20px 0 8px}
+.meter-label,.control>div{display:flex;justify-content:space-between;align-items:center}
+.meter-label{font-size:10px;color:#89919f;letter-spacing:.12em;margin-bottom:7px}
+.meter-label span:last-child{letter-spacing:0}
+.meter{height:7px;background:#080a0e;border-radius:99px;overflow:hidden}
+#meterBar{height:100%;width:0%;background:#62e6a4;border-radius:99px;transition:width .04s linear}
+.control{padding:13px 0;border-bottom:1px solid #222833}
+.control span,.select-row label{font-size:11px;color:#aab1bd;letter-spacing:.1em}
+.control b{font-size:12px;font-weight:700}
+input[type=range]{width:100%;margin:12px 0 0;accent-color:#fff}
+.select-row{display:grid;gap:7px;margin-top:16px}
+select{width:100%;background:#0d1016;color:#e9edf3;border:1px solid #303744;border-radius:10px;padding:11px;font-size:13px;outline:none}
+.message{text-align:center;color:#747d8b;font-size:11px;line-height:1.5;margin:18px 3px 0}
+@media (max-width:430px){.card{border-radius:18px;padding:18px}.app{padding:10px}}
