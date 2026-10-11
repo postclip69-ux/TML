@@ -141,15 +141,11 @@ async function buildAudio(deviceId = "") {
   if (stream) stopAudio();
 
   const constraints = {
-    audio: {
-      ...(deviceId ? { deviceId: { ideal: deviceId } } : {}),
-      channelCount: { ideal: 1 },
-      echoCancellation: false,
-      noiseSuppression: false,
-      autoGainControl: false
-    },
-    video: false
-  };
+  audio: deviceId
+    ? { deviceId: { ideal: deviceId } }
+    : true,
+  video: false
+};
 
   try {
     stream = await navigator.mediaDevices.getUserMedia(constraints);
